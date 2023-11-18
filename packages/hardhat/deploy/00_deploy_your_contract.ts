@@ -32,7 +32,10 @@ const deployMyToken: DeployFunction = async function (hre: HardhatRuntimeEnviron
   });
 
   // Get the deployed contract
-  // const MyToken = await hre.ethers.getContract("MyToken", deployer);
+  const MyToken = await hre.ethers.getContract("MyToken", deployer);
+
+  const user1 = '0xE3c382A8B72643CC3756D532e967Eb44e885c619';
+  await MyToken.grantRole(await MyToken.MINTER_ROLE(), user1);
 };
 
 export default deployMyToken;
