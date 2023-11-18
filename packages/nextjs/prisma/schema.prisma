@@ -10,6 +10,13 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
+model Vote {
+  id        Int      @id @default(autoincrement())
+  voter     String  // Ethereum address
+  proposal  Int
+  amount    BigInt
+}
+
 model Post {
   id        String     @default(cuid()) @id
   title     String
