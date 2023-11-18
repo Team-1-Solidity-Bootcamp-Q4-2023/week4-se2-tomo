@@ -7,7 +7,7 @@ interface ApiResponse {
 
 interface SelectProposalProps {
   apiUrl: string;
-  onSelectChange: (selectedProposal: string) => void;
+  onSelectChange: (selectedProposal: number) => void;
 }
 
 const SelectProposal: React.FC<SelectProposalProps> = ({ apiUrl, onSelectChange }) => {
@@ -29,7 +29,7 @@ const SelectProposal: React.FC<SelectProposalProps> = ({ apiUrl, onSelectChange 
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedProposal = event.target.value;
-    onSelectChange(selectedProposal);
+    onSelectChange(parseInt(selectedProposal));
   };
 
   return (
@@ -38,7 +38,7 @@ const SelectProposal: React.FC<SelectProposalProps> = ({ apiUrl, onSelectChange 
       <select onChange={handleSelectChange}>
         <option value="">Select an option</option>
         {proposals.map((proposal, index) => (
-          <option key={index} value={proposal}>
+          <option key={index} value={index}>
             {proposal}
           </option>
         ))}
