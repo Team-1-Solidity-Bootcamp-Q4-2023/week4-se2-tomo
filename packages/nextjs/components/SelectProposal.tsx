@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 interface ApiResponse {
   message: string;
   proposals: string[];
+  voteCounts: string[];
 }
 
 interface SelectProposalProps {
@@ -12,6 +13,7 @@ interface SelectProposalProps {
 
 const SelectProposal: React.FC<SelectProposalProps> = ({ apiUrl, onSelectChange }) => {
   const [proposals, setProposals] = useState<string[]>([]);
+  const [voteCounts, setVoteCounts] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,6 +21,7 @@ const SelectProposal: React.FC<SelectProposalProps> = ({ apiUrl, onSelectChange 
         const response = await fetch(apiUrl);
         const data: ApiResponse = await response.json();
         setProposals(data.proposals);
+        setVoteCounts(data.voteCounts);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -39,7 +42,7 @@ const SelectProposal: React.FC<SelectProposalProps> = ({ apiUrl, onSelectChange 
         <option value="">Select an option</option>
         {proposals.map((proposal, index) => (
           <option key={index} value={index}>
-            {proposal}
+            {proposal} ({voteCounts[index]})
           </option>
         ))}
       </select>

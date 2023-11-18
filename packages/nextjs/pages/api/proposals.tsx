@@ -21,17 +21,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   ] as Contract<'TokenizedBallot'>;
 
   const proposals = [];
+  const voteCounts = [];
   let i = 0n;
   while (true) {
     try {
-      const [name, vc] = await client.readContract({
+      const [name, voteCount] = await client.readContract({
         address: deployedContract.address,
         abi: deployedContract.abi,
         functionName: 'proposals',
         args: [i],
       });
-      console.log(`Proposal ${i}: ${hexToString(name)}, ${vc.toString()}`);
+      console.log(`Proposal ${i}: ${hexToString(name)}, ${voteCount.toString()}`);
       proposals.push(hexToString(name).replace(/\u0000/g, ''));
+      voteCounts.push(voteCount.toString());
     } catch (e) {
       break;
     }
@@ -46,6 +48,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // });
 
 
-  res.status(200).json({ message: 'Success', proposals: proposals });
+  res.status(200).json({ message: 'Success', proposals, voteCounts });
 
 }
