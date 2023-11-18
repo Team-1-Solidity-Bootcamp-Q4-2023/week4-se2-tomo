@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import { MetaHeader } from "~~/components/MetaHeader";
 import { useAccount } from 'wagmi'
 import { Address as AddressType, createWalletClient, http, parseEther } from "viem";
+import { hexToString } from 'viem'
 import { Address, AddressInput, Balance, EtherInput, getParsedError } from "~~/components/scaffold-eth";
 import { useState } from "react";
 import { useDeployedContractInfo, useScaffoldContractRead, useScaffoldContractWrite, useNetworkColor } from "~~/hooks/scaffold-eth";
@@ -25,6 +26,11 @@ const Home: NextPage = () => {
     },
   });
 
+  const { data: winnerName, isLoading: isWon } = useScaffoldContractRead({
+    contractName: "TokenizedBallot",
+    functionName: "winnerName",
+    // args: [],
+  });
   const { data: votingPower, isLoading: isLoadingBalance } = useScaffoldContractRead({
     contractName: "TokenizedBallot",
     functionName: "votingPower",
@@ -51,6 +57,10 @@ const Home: NextPage = () => {
             <span className="block text-2xl mb-2">Welcome to</span>
             <span className="block text-4xl font-bold">Tokenized Ballot Vote!</span>
           </h1>
+          <h2 className="text-center mb-8">
+            <span className="block text-2xl mb-2">Winner:</span>
+            <span className="block text-4xl font-bold">{winnerName ? hexToString(winnerName).replace(/\u0000/g, '') : '...'}</span>
+          </h2>
           <p className="text-center text-lg">
             Get started by minting{" "}
             <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
