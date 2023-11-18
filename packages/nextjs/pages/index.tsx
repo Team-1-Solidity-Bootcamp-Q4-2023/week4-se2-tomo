@@ -8,6 +8,8 @@ import { Address, AddressInput, Balance, EtherInput, getParsedError } from "~~/c
 import { useState } from "react";
 import { useDeployedContractInfo, useScaffoldContractRead, useScaffoldContractWrite, useNetworkColor } from "~~/hooks/scaffold-eth";
 import SelectProposal from "~~/components/SelectProposal";
+// RecentVotesList
+import RecentVotesList from "~~/components/RecentVotesList";
 
 const Home: NextPage = () => {
   const [inputAddress, setInputAddress] = useState<AddressType>();
@@ -98,6 +100,8 @@ const Home: NextPage = () => {
             </code>
           </p>
         </div>
+        
+        <RecentVotesList />
 
         <div className="flex-grow bg-base-300 w-full mt-16 px-8 py-12">
           <div className="flex justify-center items-center gap-12 flex-col sm:flex-row">
