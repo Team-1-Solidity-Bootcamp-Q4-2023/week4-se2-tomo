@@ -15,6 +15,7 @@ model Vote {
   voter     String  // Ethereum address
   proposal  Int
   amount    BigInt
+  txHash    String?
 }
 
 model Post {
