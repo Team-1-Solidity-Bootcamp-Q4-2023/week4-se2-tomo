@@ -45,6 +45,19 @@ const Home: NextPage = () => {
     ],
     onBlockConfirmation: (txnReceipt: any) => {
       console.log("📦 Transaction blockHash", txnReceipt.blockHash);
+
+      fetch('/api/logvote', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          voter: address,
+          proposal: selectedProposal,
+          amount: voteAmount,
+          txHash: txnReceipt.transactionHash, // TODO: check if this is valid vote
+        }),
+      });
     },
   });
 
