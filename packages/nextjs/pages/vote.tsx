@@ -6,6 +6,7 @@ import { Address as AddressType, createWalletClient, http, parseEther } from "vi
 import { Address, AddressInput, Balance, EtherInput, getParsedError } from "~~/components/scaffold-eth";
 import { useState } from "react";
 import { useDeployedContractInfo, useScaffoldContractWrite, useNetworkColor } from "~~/hooks/scaffold-eth";
+import SelectProposal from "~~/components/SelectProposal";
 
 const Home: NextPage = () => {
   const [inputAddress, setInputAddress] = useState<AddressType>();
@@ -77,14 +78,7 @@ const Home: NextPage = () => {
               </button>
             </div>
             <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <MagnifyingGlassIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Explore your local transactions with the{" "}
-                <Link href="/blockexplorer" passHref className="link">
-                  Block Explorer
-                </Link>{" "}
-                tab.
-              </p>
+              <SelectProposal apiUrl='/api/proposals' onSelectChange={() => null}/>
             </div>
           </div>
         </div>
