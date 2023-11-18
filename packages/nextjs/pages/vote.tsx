@@ -1,15 +1,18 @@
 import Link from "next/link";
 import type { NextPage } from "next";
-import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { MetaHeader } from "~~/components/MetaHeader";
+import { useAccount } from 'wagmi'
 import { Address as AddressType, createWalletClient, http, parseEther } from "viem";
 import { Address, AddressInput, Balance, EtherInput, getParsedError } from "~~/components/scaffold-eth";
 import { useState } from "react";
-import { useDeployedContractInfo, useScaffoldContractWrite, useNetworkColor } from "~~/hooks/scaffold-eth";
+import { useDeployedContractInfo, useScaffoldContractRead, useScaffoldContractWrite, useNetworkColor } from "~~/hooks/scaffold-eth";
 import SelectProposal from "~~/components/SelectProposal";
 
 const Home: NextPage = () => {
   const [inputAddress, setInputAddress] = useState<AddressType>();
+  const [voteAmount, setVoteAmount] = useState('0');
+  const [selectedProposal, setSelectedProposal] = useState(0);
+  const { address, isConnecting, isDisconnected } = useAccount();
 
   const { writeAsync, isLoading } = useScaffoldContractWrite({
     contractName: "MyToken",
@@ -21,6 +24,24 @@ const Home: NextPage = () => {
       console.log("📦 Transaction blockHash", txnReceipt.blockHash);
     },
   });
+
+  const { data: votingPower, isLoading: isLoadingBalance } = useScaffoldContractRead({
+    contractName: "TokenizedBallot",
+    functionName: "votingPower",
+    args: [address],
+  });
+  const { writeAsync: vote, isLoading: isVoting } = useScaffoldContractWrite({
+    contractName: "TokenizedBallot",
+    functionName: 'vote',
+    args: [
+      BigInt(selectedProposal),
+      BigInt(parseInt(voteAmount))
+    ],
+    onBlockConfirmation: (txnReceipt: any) => {
+      console.log("📦 Transaction blockHash", txnReceipt.blockHash);
+    },
+  });
+
   return (
     <>
       <MetaHeader />
@@ -74,11 +95,38 @@ const Home: NextPage = () => {
                   e.preventDefault();
                 }}
               >
-                Delegate
+                DelegatevoteAmount
               </button>
             </div>
             <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <SelectProposal apiUrl='/api/proposals' onSelectChange={() => null}/>
+              <p className="text-center text-lg">
+                Your voting power{" "}
+                <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
+                  {votingPower ? votingPower.toString() : "0"}
+                </code>{" "}
+              </p>
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="voteAmount">
+                voting Amount
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="voteAmount"
+                type="text" 
+                value={voteAmount}
+                onChange={(e) => setVoteAmount(e.target.value)}
+              />
+              <SelectProposal apiUrl='/api/proposals' onSelectChange={setSelectedProposal}/>
+              <button
+                type="button"
+                className="bg-blue-500 text-white m-2 p-2 rounded hover:bg-blue-700"
+                onClick={(e) => {
+                  vote();
+                  e.preventDefault();
+                }}
+              >
+                Vote
+              </button>
+
             </div>
           </div>
         </div>
