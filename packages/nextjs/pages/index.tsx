@@ -17,11 +17,21 @@ const Home: NextPage = () => {
   const [selectedProposal, setSelectedProposal] = useState(0);
   const { address, isConnecting, isDisconnected } = useAccount();
 
-  const { writeAsync, isLoading } = useScaffoldContractWrite({
+  const { writeAsync: writeAsyncDelegate, isLoading } = useScaffoldContractWrite({
     contractName: "MyToken",
     functionName: 'delegate',
     args: [
       inputAddress
+    ],
+    onBlockConfirmation: (txnReceipt: any) => {
+      console.log("📦 Transaction blockHash", txnReceipt.blockHash);
+    },
+  });
+  const { writeAsync: writeAsyncSelfDelegate } = useScaffoldContractWrite({
+    contractName: "MyToken",
+    functionName: 'delegate',
+    args: [
+      address
     ],
     onBlockConfirmation: (txnReceipt: any) => {
       console.log("📦 Transaction blockHash", txnReceipt.blockHash);
@@ -100,7 +110,7 @@ const Home: NextPage = () => {
             </code>
           </p>
         </div>
-        
+
         <RecentVotesList />
 
         <div className="flex-grow bg-base-300 w-full mt-16 px-8 py-12">
@@ -118,11 +128,21 @@ const Home: NextPage = () => {
                 type="button"
                 className="bg-blue-500 text-white m-2 p-2 rounded hover:bg-blue-700"
                 onClick={(e) => {
-                  writeAsync();
+                  writeAsyncDelegate();
                   e.preventDefault();
                 }}
               >
-                DelegatevoteAmount
+                Delegate
+              </button>
+              <button
+                type="button"
+                className="bg-blue-500 text-white m-2 p-2 rounded hover:bg-blue-700"
+                onClick={(e) => {
+                  writeAsyncSelfDelegate();
+                  e.preventDefault();
+                }}
+              >
+                Self-Delegate
               </button>
             </div>
             <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
