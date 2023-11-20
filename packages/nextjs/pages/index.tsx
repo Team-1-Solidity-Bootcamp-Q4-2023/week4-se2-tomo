@@ -2,12 +2,13 @@ import Link from "next/link";
 import type { NextPage } from "next";
 import { MetaHeader } from "~~/components/MetaHeader";
 import { useAccount } from 'wagmi'
-import { Address as AddressType, createWalletClient, hexToBigInt, http, parseEther } from "viem";
+import { Address as AddressType, createWalletClient, http, parseEther } from "viem";
 import { hexToString } from 'viem'
 import { Address, AddressInput, Balance, EtherInput, getParsedError } from "~~/components/scaffold-eth";
 import { useState } from "react";
 import { useDeployedContractInfo, useScaffoldContractRead, useScaffoldContractWrite, useNetworkColor } from "~~/hooks/scaffold-eth";
 import SelectProposal from "~~/components/SelectProposal";
+// RecentVotesList
 import RecentVotesList from "~~/components/RecentVotesList";
 
 const Home: NextPage = () => {
@@ -42,13 +43,6 @@ const Home: NextPage = () => {
     functionName: "winnerName",
     // args: [],
   });
-  const normalizedWinnerName = (name: `0x${string}`) => {
-    if (hexToString(name).replace(/\u0000/g, '').endsWith(' BTC')) {
-      return hexToString(name).replace(/\u0000/g, '');
-    } else {
-      return (hexToBigInt(name) / BigInt(1e18)).toString();
-    }
-  } 
   const { data: votingPower, isLoading: isLoadingBalance } = useScaffoldContractRead({
     contractName: "TokenizedBallot",
     functionName: "votingPower",
@@ -87,14 +81,10 @@ const Home: NextPage = () => {
           <h1 className="text-center mb-8">
             <span className="block text-2xl mb-2">Welcome to</span>
             <span className="block text-4xl font-bold">Tokenized Ballot Vote!</span>
-            <p className="text-center text-lg">
-              Would you rather have 1 BTC or this much USD?
-            </p>
-
           </h1>
           <h2 className="text-center mb-8">
             <span className="block text-2xl mb-2">Winner:</span>
-            <span className="block text-4xl font-bold">{winnerName ? normalizedWinnerName(winnerName) : '...'}</span>
+            <span className="block text-4xl font-bold">{winnerName ? hexToString(winnerName).replace(/\u0000/g, '') : '...'}</span>
           </h2>
           <p className="text-center text-lg">
             Get started by minting{" "}
