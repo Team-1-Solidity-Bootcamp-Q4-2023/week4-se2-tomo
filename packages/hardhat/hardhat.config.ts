@@ -47,7 +47,7 @@ const config: HardhatUserConfig = {
       accounts: [deployerPrivateKey],
     },
     sepolia: {
-      url: process.env.RPC_ENDPOINT_URL ? process.env.RPC_ENDPOINT_URL : `https://eth-sepolia.g.alchemy.com/v2/${providerApiKey}`,
+      url: `https://eth-sepolia.g.alchemy.com/v2/${providerApiKey}`,
       accounts: [deployerPrivateKey],
     },
     goerli: {
