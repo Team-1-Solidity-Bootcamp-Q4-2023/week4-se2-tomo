@@ -6,7 +6,7 @@ import { http } from 'viem'
 import scaffoldConfig from "~~/scaffold.config";
 import { Contract, ContractName, contracts } from "~~/utils/scaffold-eth/contract";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
     console.log(req.method);
     // console.log(req.body);
 
@@ -33,8 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const client = createWalletClient({
         account,
         chain: scaffoldConfig.targetNetwork,
-        // transport: http()
-        transport: http(process.env.RPC_ENDPOINT_URL ?? "" as `http://${string}`)
+        transport: http()
     });
 
     // const wallet = new ethers.Wallet(process.env.PRIVATE_KEY ?? "", provider);
@@ -45,14 +44,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     ] as Contract<'MyToken'>;
     // console.log(deployedContract);
 
-    const tx = await client.writeContract({
+    client.writeContract({
         address: deployedContract.address,
         abi: deployedContract.abi,
         functionName: 'mint',
         // args: [acc2.address, BigInt(100) * BigInt(10) ** BigInt(18)],
         args: [to, BigInt(100) * BigInt(10 ** 18)],
     });
-    console.log(tx);
     res.status(200).json({ message: 'Mint Success' });
 
 }
