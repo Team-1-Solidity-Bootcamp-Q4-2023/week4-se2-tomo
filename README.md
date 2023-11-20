@@ -9,5 +9,4 @@
 
 ## Debug Contract
 ### Screenshot showing all available functions and fields
-![Debug Contract] (https://github.com/Team-1-Solidity-Bootcamp-Q4-2023/week4-se2-tomo/blob/4c0486cc53e5193eec0e31d89950639e35d659bd/Screenshot.png?raw=true)
-file:///home/vm/Desktop/bak-week4-se2-tomo/Screenshot.png
+![Debug Contract] (Screenshot.png)
