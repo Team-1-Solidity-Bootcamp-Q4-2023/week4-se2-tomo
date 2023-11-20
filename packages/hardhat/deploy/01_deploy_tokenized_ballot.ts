@@ -21,13 +21,13 @@ const deployTokenizedBallot: DeployFunction = async function (hre: HardhatRuntim
     const { deployer } = await hre.getNamedAccounts();
     const { deploy } = hre.deployments;
 
-    // const PROPOSALS = ["Proposal 1", "Proposal 2", "Proposal 3"];
+    const PROPOSALS = ["Proposal 1", "Proposal 2", "Proposal 3"];
 
     const provider = hre.ethers.provider;
 
     const MyToken = await hre.ethers.getContract("MyToken", deployer);
 
-    // const proposals = PROPOSALS.map((proposal) => hre.ethers.utils.formatBytes32String(proposal));
+    const proposals = PROPOSALS.map((proposal) => hre.ethers.utils.formatBytes32String(proposal));
 
     const lastBlock = await provider.getBlock("latest");
     const lastBlockNumber = lastBlock?.number ?? 0;
@@ -35,13 +35,11 @@ const deployTokenizedBallot: DeployFunction = async function (hre: HardhatRuntim
         throw new Error("lastBlockNumber is 0");
     }
 
-    const PriceContract = await hre.ethers.getContract("PriceContract", deployer);
 
     await deploy("TokenizedBallot", {
         from: deployer,
         // Contract constructor arguments
-        // args: [proposals, MyToken.address, lastBlockNumber - 1],
-        args: [PriceContract.address, MyToken.address, lastBlockNumber - 1],
+        args: [proposals, MyToken.address, lastBlockNumber - 1],
         log: true,
         // autoMine: can be passed to the deploy function to make the deployment process faster on local networks by
         // automatically mining the contract deployment transaction. There is no effect on live networks.
