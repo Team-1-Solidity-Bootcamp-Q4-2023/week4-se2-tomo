@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { createPublicClient } from 'viem'
+import { createPublicClient, hexToBigInt } from 'viem'
 import { http, hexToString } from 'viem'
 
 import scaffoldConfig from "~~/scaffold.config";
@@ -32,7 +32,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         args: [i],
       });
       console.log(`Proposal ${i}: ${hexToString(name)}, ${voteCount.toString()}`);
-      proposals.push(hexToString(name).replace(/\u0000/g, ''));
+      if (hexToString(name).replace(/\u0000/g, '').endsWith(' BTC')) {
+        proposals.push(hexToString(name).replace(/\u0000/g, ''));
+      } else {
+        proposals.push((hexToBigInt(name) / BigInt(1e18)).toString());
+      }
       voteCounts.push(voteCount.toString());
     } catch (e) {
       break;
