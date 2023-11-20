@@ -978,26 +978,9 @@ const deployedContracts = {
           "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
       },
     },
-<<<<<<< HEAD
     PriceContract: {
       address: "0x9A676e781A523b5d0C0e43731313A708CB607508",
-=======
-  },
-  11155111: {
-    MyToken: {
-      address: "0xA29A587A007aad8Fad97660c84343355Fb3F93F0",
->>>>>>> 2757995618efd55a6eb995701f2cec73926e2c10
       abi: [
-        {
-          inputs: [],
-          stateMutability: "nonpayable",
-          type: "constructor",
-        },
-        {
-          inputs: [],
-          name: "InvalidShortString",
-          type: "error",
-        },
         {
           inputs: [
             {
@@ -1006,8 +989,8 @@ const deployedContracts = {
               type: "address",
             },
           ],
-          name: "StringTooLong",
-          type: "error",
+          stateMutability: "nonpayable",
+          type: "constructor",
         },
         {
           inputs: [],
@@ -2284,7 +2267,6 @@ const deployedContracts = {
             {
               internalType: "address",
               name: "account",
-<<<<<<< HEAD
               type: "address",
             },
           ],
@@ -2754,319 +2736,23 @@ const deployedContracts = {
               type: "address",
             },
           ],
-=======
-              type: "address",
-            },
-          ],
-          name: "numCheckpoints",
-          outputs: [
-            {
-              internalType: "uint32",
-              name: "",
-              type: "uint32",
-            },
-          ],
->>>>>>> 2757995618efd55a6eb995701f2cec73926e2c10
           stateMutability: "view",
           type: "function",
         },
         {
           inputs: [
             {
-<<<<<<< HEAD
               internalType: "bytes32",
               name: "_queryId",
-=======
-              internalType: "address",
-              name: "owner",
-              type: "address",
-            },
-            {
-              internalType: "address",
-              name: "spender",
-              type: "address",
-            },
-            {
-              internalType: "uint256",
-              name: "value",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
-              name: "deadline",
-              type: "uint256",
-            },
-            {
-              internalType: "uint8",
-              name: "v",
-              type: "uint8",
-            },
-            {
-              internalType: "bytes32",
-              name: "r",
-              type: "bytes32",
-            },
-            {
-              internalType: "bytes32",
-              name: "s",
-              type: "bytes32",
-            },
-          ],
-          name: "permit",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "bytes32",
-              name: "role",
-              type: "bytes32",
-            },
-            {
-              internalType: "address",
-              name: "account",
-              type: "address",
-            },
-          ],
-          name: "renounceRole",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "bytes32",
-              name: "role",
-              type: "bytes32",
-            },
-            {
-              internalType: "address",
-              name: "account",
-              type: "address",
-            },
-          ],
-          name: "revokeRole",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "bytes4",
-              name: "interfaceId",
-              type: "bytes4",
-            },
-          ],
-          name: "supportsInterface",
-          outputs: [
-            {
-              internalType: "bool",
-              name: "",
-              type: "bool",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "symbol",
-          outputs: [
-            {
-              internalType: "string",
-              name: "",
-              type: "string",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "totalSupply",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "address",
-              name: "to",
-              type: "address",
-            },
-            {
-              internalType: "uint256",
-              name: "amount",
-              type: "uint256",
-            },
-          ],
-          name: "transfer",
-          outputs: [
-            {
-              internalType: "bool",
-              name: "",
-              type: "bool",
-            },
-          ],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "address",
-              name: "from",
-              type: "address",
-            },
-            {
-              internalType: "address",
-              name: "to",
-              type: "address",
-            },
-            {
-              internalType: "uint256",
-              name: "amount",
-              type: "uint256",
-            },
-          ],
-          name: "transferFrom",
-          outputs: [
-            {
-              internalType: "bool",
-              name: "",
-              type: "bool",
-            },
-          ],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-      ],
-      inheritedFunctions: {
-        allowance:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        approve:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        balanceOf:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        decimals:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        decreaseAllowance:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        increaseAllowance:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        name: "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        symbol: "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        totalSupply:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        transfer:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        transferFrom:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        DEFAULT_ADMIN_ROLE: "@openzeppelin/contracts/access/AccessControl.sol",
-        getRoleAdmin: "@openzeppelin/contracts/access/AccessControl.sol",
-        grantRole: "@openzeppelin/contracts/access/AccessControl.sol",
-        hasRole: "@openzeppelin/contracts/access/AccessControl.sol",
-        renounceRole: "@openzeppelin/contracts/access/AccessControl.sol",
-        revokeRole: "@openzeppelin/contracts/access/AccessControl.sol",
-        supportsInterface: "@openzeppelin/contracts/access/AccessControl.sol",
-        DOMAIN_SEPARATOR:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        eip712Domain:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        nonces: "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        permit: "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        CLOCK_MODE:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        checkpoints:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        clock: "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        delegate:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        delegateBySig:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        delegates:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        getPastTotalSupply:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        getPastVotes:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        getVotes:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-        numCheckpoints:
-          "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol",
-      },
-    },
-    TokenizedBallot: {
-      address: "0x00E6BF1F0eF0633e3f047aBCc22985234ddCf074",
-      abi: [
-        {
-          inputs: [
-            {
-              internalType: "bytes32[]",
-              name: "_proposalNames",
-              type: "bytes32[]",
-            },
-            {
-              internalType: "contract IMyToken",
-              name: "_tokenContract",
-              type: "address",
-            },
-            {
-              internalType: "uint256",
-              name: "_targetBlockNumber",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "nonpayable",
-          type: "constructor",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          name: "proposals",
-          outputs: [
-            {
-              internalType: "bytes32",
-              name: "name",
->>>>>>> 2757995618efd55a6eb995701f2cec73926e2c10
               type: "bytes32",
             },
             {
               internalType: "uint256",
-<<<<<<< HEAD
               name: "_index",
               type: "uint256",
             },
           ],
           name: "getTimestampbyQueryIdandIndex",
-=======
-              name: "voteCount",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "targetBlockNumber",
->>>>>>> 2757995618efd55a6eb995701f2cec73926e2c10
           outputs: [
             {
               internalType: "uint256",
@@ -3079,17 +2765,10 @@ const deployedContracts = {
         },
         {
           inputs: [],
-<<<<<<< HEAD
           name: "idMappingContract",
           outputs: [
             {
               internalType: "contract IMappingContract",
-=======
-          name: "tokenContract",
-          outputs: [
-            {
-              internalType: "contract IMyToken",
->>>>>>> 2757995618efd55a6eb995701f2cec73926e2c10
               name: "",
               type: "address",
             },
@@ -3100,7 +2779,6 @@ const deployedContracts = {
         {
           inputs: [
             {
-<<<<<<< HEAD
               internalType: "bytes32",
               name: "_queryId",
               type: "bytes32",
@@ -3149,19 +2827,6 @@ const deployedContracts = {
         {
           inputs: [],
           name: "setBtcPrice",
-=======
-              internalType: "uint256",
-              name: "proposal",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
-              name: "amount",
-              type: "uint256",
-            },
-          ],
-          name: "vote",
->>>>>>> 2757995618efd55a6eb995701f2cec73926e2c10
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",
@@ -3170,7 +2835,6 @@ const deployedContracts = {
           inputs: [
             {
               internalType: "address",
-<<<<<<< HEAD
               name: "_addy",
               type: "address",
             },
@@ -3349,8 +3013,6 @@ const deployedContracts = {
           inputs: [
             {
               internalType: "address",
-=======
->>>>>>> 2757995618efd55a6eb995701f2cec73926e2c10
               name: "",
               type: "address",
             },

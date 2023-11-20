@@ -1,4 +1,4 @@
-import WalletInfo from "../components/WalletInfo";
+import Link from "next/link";
 import type { NextPage } from "next";
 import { MetaHeader } from "~~/components/MetaHeader";
 import { useAccount } from 'wagmi'
@@ -81,7 +81,6 @@ const Home: NextPage = () => {
 
   return (
     <>
-<<<<<<< HEAD
       <MetaHeader />
       <div className="flex items-center flex-col flex-grow pt-10">
         <div className="px-5">
@@ -188,10 +187,6 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-=======
-      <div className="w-screen flex items-center justify-center flex-col flex-grow pt-10">
-        <WalletInfo />
->>>>>>> 2757995618efd55a6eb995701f2cec73926e2c10
       </div>
     </>
   );
