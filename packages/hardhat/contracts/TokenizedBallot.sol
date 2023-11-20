@@ -5,31 +5,59 @@ interface IMyToken {
     function getPastVotes(address, uint256) external view returns (uint256);
 }
 
+interface IPriceContract {
+    function setBtcPrice() external;
+    function btcPrice() external view returns (uint256);
+}
+
 contract TokenizedBallot {
     struct Proposal {
         bytes32 name;
         uint voteCount;
     }
 
+    IPriceContract public priceContract;
     IMyToken public tokenContract;
     Proposal[] public proposals;
     uint256 public targetBlockNumber;
     mapping(address => uint256) public votedPower;
 
+    // constructor(
+    //     bytes32[] memory _proposalNames,
+    //     IMyToken _tokenContract,
+    //     uint256 _targetBlockNumber
+    // ) {
+    //     tokenContract = IMyToken(_tokenContract);
+    //     targetBlockNumber = _targetBlockNumber;
+    //     require(
+    //         _targetBlockNumber < block.number,
+    //         "TokenizedBallot: Target block number must be in the past"
+    //     );
+    //     for (uint i = 0; i < _proposalNames.length; i++) {
+    //         proposals.push(Proposal({name: _proposalNames[i], voteCount: 0}));
+    //     }
+    // }
     constructor(
-        bytes32[] memory _proposalNames,
+        // bytes32[] memory _proposalNames,
+        IPriceContract _priceContract,
         IMyToken _tokenContract,
         uint256 _targetBlockNumber
     ) {
-        tokenContract = IMyToken(_tokenContract);
-        targetBlockNumber = _targetBlockNumber;
         require(
             _targetBlockNumber < block.number,
             "TokenizedBallot: Target block number must be in the past"
         );
-        for (uint i = 0; i < _proposalNames.length; i++) {
-            proposals.push(Proposal({name: _proposalNames[i], voteCount: 0}));
-        }
+
+        priceContract = IPriceContract(_priceContract);
+        uint256 btcPrice = priceContract.btcPrice();
+        bytes32 btcPriceName = bytes32(btcPrice); // Convert the uint to bytes32 for the name
+        proposals.push(Proposal(btcPriceName, 0));
+
+        // bytes32 oneBTCName = "1 BTC";
+        proposals.push(Proposal("1 BTC", 0));
+
+        tokenContract = IMyToken(_tokenContract);
+        targetBlockNumber = _targetBlockNumber;
     }
 
     function votingPower(address account) public view returns (uint256) {
