@@ -1,5 +1,7 @@
 ![image](https://github.com/Team-1-Solidity-Bootcamp-Q4-2023/week4-se2-tomo/assets/1016509/6ee72f06-a34b-4a06-855e-46da68932f54)
 
+Link: [https://team1week4.vercel.app/](https://team1week4.vercel.app/)
+
 A dapp with voting tokens, and a deployable ballot which takes its proposals from a Tellor Oracle, allowing voters to record whether they prefer 1 BTC or some amount of USD (amount set by Oracle). Voters may vote multiple times in any proposal until using up all of their voting power.
 
 MyToken is an ERC20 token which anyone (currently) can request from the faucet by posting an address to the API (server component). This contract is first deployed and then voters can use the frontend to self-delegate or delegate to another (following the erc20votes interface).
